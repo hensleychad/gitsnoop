@@ -1,1 +1,4 @@
 venv
+files/*.csv
+files/*.bkup
+config/*.txt

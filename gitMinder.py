@@ -1,6 +1,7 @@
 from pydriller import RepositoryMining, GitRepository
 from datetime import datetime, timezone, timedelta
 import yaml
+from sys import argv
 
 def getconfig ( configFile ):
     configHandler = openFile(configFile, "r")
@@ -14,12 +15,11 @@ def closeFile ( fileHandler ):
     fileHandler.close()
 
 
-def mineRepo( repoPath , branch, startDate, stopDate, metaHandler):
+def mineBranch( repoPath , branch, startDate, stopDate, metaHandler):
     commitCount = 0
     fileChangeCount = 0
     marker = 1
 
-    metaHandler.write('branch_name,developer,changed_file,change_type,commit_date,commit_hash\n')
     for commit in RepositoryMining( repoPath, only_in_branch=branch,since=startDate, to=stopDate).traverse_commits():
           for modification in commit.modifications:
               metaHandler.write('{},{},{},{},{},{}\n'.format(branch, commit.author.name, modification.filename, modification.change_type, commit.committer_date,commit.hash))
@@ -34,7 +34,9 @@ if __name__ == "__main__":
     fileChangeCount = 0
     finalFileChangeCount = 0
 
-    config = getconfig ( './config.yaml' )
+    configFile = argv[1]
+
+    config = getconfig ( configFile )
 
     to_zone = timezone(timedelta(hours=config["TIME_ZONE_OFFSET"]))
     startDate = datetime(config["START_YEAR"], config["START_MONTH"], config["START_DAY"], 0, 0, 0, tzinfo=to_zone)
@@ -44,6 +46,7 @@ if __name__ == "__main__":
     metaHandler = openFile(config["META_FILE"], "w")
     countHandler = openFile(config["COUNT_FILE"], "w")
 
+    metaHandler.write('branch_name,developer,changed_file,change_type,commit_date,commit_hash\n')
     for branch in config["BRANCHES"]:
       commitCount, fileChangeCount = mineRepo(config["LOCAL_REPO"], branch, startDate, stopDate, metaHandler)
       finalCommitCount += commitCount

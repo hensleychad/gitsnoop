@@ -27,6 +27,7 @@ def fillBasket ( dataFrame ):
                 .groupby(['commit_hash', 'changed_file'])['marker']
                 .sum().unstack().reset_index().fillna(0)
                 .set_index('commit_hash'))
+    print(dfBasket.head())
     return dfBasket
 
 def showRules ( rules ):

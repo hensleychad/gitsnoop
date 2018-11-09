@@ -1,6 +1,6 @@
 files
 .idea
 venv
-files/*.csv
-files/*.bkup
+files
 config/*.txt
+run

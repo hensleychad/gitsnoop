@@ -1,5 +1,5 @@
-META_FILE: '/tmp/ppmeta.csv'
-COUNT_FILE: '/tmp/ppmeta_count.csv'
+META_FILE: '/Users/chensle/PycharmProjects/gminer/run/pdf-vcs_meta.csv'
+COUNT_FILE: '/Users/chensle/PycharmProjects/gminer/run/pdf-vcs_count.csv'
 LOCAL_REPO: '/Users/chensle/emse/SE6356.MS1-SoftwareMaintenanceEvolutionAndRe-Engineering-F18/Projects/local_repo/peep-pdfbox'
 #BRANCHES: ["1.1.x", "1.2", "1.2.x", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.0", "before-apache-packages", "before-maven-layout", "no-awt", "trunk", "xmpbox-refactoring"]
 BRANCHES: ["1.1.x"]

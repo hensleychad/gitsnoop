@@ -18,11 +18,11 @@ def closeFile ( fileHandler ):
 def mineBranch( repoPath , branch, startDate, stopDate, metaHandler):
     commitCount = 0
     fileChangeCount = 0
-    marker = 1
+    marker = 1  # this is a marker used for reshaping
 
     for commit in RepositoryMining( repoPath, only_in_branch=branch,since=startDate, to=stopDate).traverse_commits():
           for modification in commit.modifications:
-              metaHandler.write('{},{},{},{},{},{}\n'.format(branch, commit.author.name, modification.filename, modification.change_type, commit.committer_date,commit.hash))
+              metaHandler.write('{},{},{},{},{},{},{}\n'.format(branch, commit.author.name, modification.filename, modification.change_type, commit.committer_date,commit.hash,marker))
               fileChangeCount += 1
           commitCount += 1
     print ("Branch {},File Change {},Commit Count {}".format(branch, fileChangeCount, commitCount))
@@ -46,9 +46,9 @@ if __name__ == "__main__":
     metaHandler = openFile(config["META_FILE"], "w")
     countHandler = openFile(config["COUNT_FILE"], "w")
 
-    metaHandler.write('branch_name,developer,changed_file,change_type,commit_date,commit_hash\n')
+    metaHandler.write('branch_name,developer,changed_file,change_type,commit_date,commit_hash,marker\n')
     for branch in config["BRANCHES"]:
-      commitCount, fileChangeCount = mineRepo(config["LOCAL_REPO"], branch, startDate, stopDate, metaHandler)
+      commitCount, fileChangeCount =  mineBranch(config["LOCAL_REPO"], branch, startDate, stopDate, metaHandler)
       finalCommitCount += commitCount
       finalFileChangeCount += fileChangeCount
     closeFile(metaHandler)

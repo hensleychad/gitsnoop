@@ -1,8 +1,8 @@
-META_FILE: '/tmp/meta.csv'
-COUNT_FILE: '/tmp/meta_count.csv'
+META_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_meta.csv'
+COUNT_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_count.csv'
 LOCAL_REPO: '/Users/chensle/emse/SE6356.MS1-SoftwareMaintenanceEvolutionAndRe-Engineering-F18/Projects/local_repo/peep-commons-math'
 ### Keep it small for testing
-#BRANCHES: ["3.6-release", "3.6.1-release", "EXPERIMENTAL"]
+BRANCHES: ["3.6-release", "3.6.1-release", "EXPERIMENTAL"]
   # branches with _tmp suffix were detached from the head, this may not be an issue for some.
     # use any name, added _tmp as an indicator to me
     # to fix detached from head error
@@ -11,10 +11,10 @@ LOCAL_REPO: '/Users/chensle/emse/SE6356.MS1-SoftwareMaintenanceEvolutionAndRe-En
     #           "MATH_1_1_RC1_tmp", "MATH_1_3", "MATH_2_0_tmp", "MATH_2_X", "MATH_3_X", "complex-and-primitive-arrays",
     #           "develop", "feature-MATH-1290", "feature-MATH-1333", "feature-MATH-1370", "feature-MATH-1372", "feature-MATH-1416",
     #           "field-ode", "fix-math-1342", "h10-builds", "master", "master-old", "task-MATH-1366"]
-BRANCHES: ["3.6-release", "3.6.1-release", "EXPERIMENTAL", "MANTISSA", "MATH-1153", "MATH_1_1",
-            "MATH_1_1_RC1_tmp", "MATH_1_3", "MATH_2_0_tmp", "MATH_2_X", "MATH_3_X", "complex-and-primitive-arrays",
-            "develop", "feature-MATH-1290", "feature-MATH-1333", "feature-MATH-1370", "feature-MATH-1372",
-            "feature-MATH-1416","field-ode", "fix-math-1342", "h10-builds", "master", "master-old", "task-MATH-1366"]
+#BRANCHES: ["3.6-release", "3.6.1-release", "EXPERIMENTAL", "MANTISSA", "MATH-1153", "MATH_1_1",
+#            "MATH_1_1_RC1_tmp", "MATH_1_3", "MATH_2_0_tmp", "MATH_2_X", "MATH_3_X", "complex-and-primitive-arrays",
+#            "develop", "feature-MATH-1290", "feature-MATH-1333", "feature-MATH-1370", "feature-MATH-1372",
+#            "feature-MATH-1416","field-ode", "fix-math-1342", "h10-builds", "master", "master-old", "task-MATH-1366"]
 START_YEAR: 2003
 START_MONTH: 5
 START_DAY: 1

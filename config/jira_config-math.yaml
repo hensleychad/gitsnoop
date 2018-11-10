@@ -1,0 +1,11 @@
+META_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_meta.csv'
+COUNT_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_count.csv'
+JIRA_URL: '/https://issues.apache.org/jira'
+JIRA_PROJECT_KEY:MATH
+START_YEAR: 2003
+START_MONTH: 5
+START_DAY: 1
+STOP_YEAR: 2017
+STOP_MONTH: 11
+STOP_DAY: 1
+TIME_ZONE_OFFSET: 6

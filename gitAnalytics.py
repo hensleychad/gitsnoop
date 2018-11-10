@@ -23,7 +23,7 @@ def getItemSets ( dataFrame , minSupport ):
 
 def fillBasket ( dataFrame ):
     dfBasket = (df[df['change_type'] == "ModificationType.MODIFY"]
-                .drop(['branch_name', 'developer', 'change_type'], axis=1)
+                .drop(['committer_name', 'change_type'], axis=1)
                 .groupby(['commit_hash', 'changed_file'])['marker']
                 .sum().unstack().reset_index().fillna(0)
                 .set_index('commit_hash'))

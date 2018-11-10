@@ -22,10 +22,11 @@ def mineBranch( repoPath , branch, startDate, stopDate, metaHandler):
 
     for commit in RepositoryMining( repoPath, only_in_branch=branch,since=startDate, to=stopDate).traverse_commits():
           for modification in commit.modifications:
-              metaHandler.write('{},{},{},{},{},{},{}\n'.format(branch, commit.author.name, modification.filename, modification.change_type, commit.committer_date,commit.hash,marker))
+              metaHandler.write('{},{},{},{},{},{},{}\n'.format( commit.committer.name, commit.committer.email, commit.committer_date,
+                                                                  modification.filename, modification.change_type,commit.hash,marker))
               fileChangeCount += 1
           commitCount += 1
-    print ("Branch {},File Change {},Commit Count {}".format(branch, fileChangeCount, commitCount))
+    print ("Branch Name {},File Change {},Commit Count {}".format(branch, fileChangeCount, commitCount))
     return commitCount, fileChangeCount
 
 if __name__ == "__main__":
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     metaHandler = openFile(config["META_FILE"], "w")
     countHandler = openFile(config["COUNT_FILE"], "w")
 
-    metaHandler.write('branch_name,developer,changed_file,change_type,commit_date,commit_hash,marker\n')
+    metaHandler.write('committer_name,committer_email,committer_date,changed_file,change_type,commit_hash,marker\n')
     for branch in config["BRANCHES"]:
       commitCount, fileChangeCount =  mineBranch(config["LOCAL_REPO"], branch, startDate, stopDate, metaHandler)
       finalCommitCount += commitCount

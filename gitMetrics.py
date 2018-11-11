@@ -8,6 +8,11 @@ def findDevelopers (dataFrame) :
     for  row in userDff.iteritems():
         print(row)
 
+def determineActivity (dataFrame ):
+    dataFrame['committer_date'] = pd.to_datetime(dataFrame['committer_date'])
+    userDf = dataFrame.groupby(['committer_name'])['committer_date'].max()
+    print (userDf)
+
 def groupCommitsFileChangedByCommitter (dataFrame) :
     series = dataFrame.groupby(['committer_name','commit_hash'])['changed_file'].count()
     print(series)
@@ -27,6 +32,7 @@ def groupCommitsFileChangedByCommitterWithFilter (dataFrame ,filterBy) :
 
     print(committerDf.head())
     return committerDf
+
 def countCommits (dataFrame) :
     totalCommitCount = 0
     totalFileChangedCount = 0
@@ -73,6 +79,8 @@ if __name__ == "__main__":
   commitsWithZeroChangeCount = int(argv[2])  # pass this in, there are commits without changes but tracking them anyway
 
   dataFrame = pd.read_csv(transactionFile)
+
+  determineActivity(dataFrame)
 
   findDevelopers(dataFrame)
   committerDf = groupCommitsFileChangedByCommitter(dataFrame)

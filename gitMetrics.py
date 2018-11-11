@@ -81,16 +81,19 @@ if __name__ == "__main__":
   getRatios (commitsWithZeroChangeCount, totalFileChangedCount, countsDf)
   getFileChangedAverage (countsDf)
 
- # addDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.ADD")
- # getFileChangedMedian(addDataFrame);
- # totalCommitCount, totalFileChangedCount, addCountsDf  = countCommits(addDataFrame)
- # getFileChangedAverage (addCountsDf)
+  print("Finding Average & Medians for Adds\n")
+  addDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.ADD")
+  getFileChangedMedian(addDataFrame);
+  totalCommitCount, totalFileChangedCount, addCountsDf  = countCommits(addDataFrame)
+  getFileChangedAverage (addCountsDf)
 
-#  modifyDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.MODIFY")
-#  getFileChangedMedian(modifyDataFrame);
-#  totalCommitCount, totalFileChangedCount, modifyCountsDf  = countCommits(modifyDataFrame)
-#  getFileChangedAverage (modifyCountsDf)
+  print("Finding Average & Medians for Modifies\n")
+  modifyDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.MODIFY")
+  getFileChangedMedian(modifyDataFrame);
+  totalCommitCount, totalFileChangedCount, modifyCountsDf  = countCommits(modifyDataFrame)
+  getFileChangedAverage (modifyCountsDf)
 
+  print("Finding Average & Medians for Deletes\n")
   deleteDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.DELETE")
   getFileChangedMedian(deleteDataFrame)
   totalCommitCount, totalFileChangedCount, deleteCountsDf  = countCommits(deleteDataFrame)

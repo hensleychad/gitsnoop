@@ -2,6 +2,7 @@ META_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_meta.csv'
 COUNT_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_count.csv'
 LOCAL_REPO: '/Users/chensle/emse/SE6356.MS1-SoftwareMaintenanceEvolutionAndRe-Engineering-F18/Projects/local_repo/peep-commons-math'
 ### Keep it small for testing
+#BRANCHES: ["3.6-release"]
 #BRANCHES: ["3.6-release", "3.6.1-release", "EXPERIMENTAL"]
   # branches with _tmp suffix were detached from the head, this may not be an issue for some.
     # use any name, added _tmp as an indicator to me

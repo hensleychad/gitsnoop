@@ -17,8 +17,10 @@ def groupCommitsFileChangedByCommitter (dataFrame) :
     print(committerDf.head())
     return committerDf
 
-def groupCommitsFileChangedByCommitterWithFilter (dataFrame) :
-    series = dataFrame.groupby(['committer_name','commit_hash'])['changed_file'].count()
+def groupCommitsFileChangedByCommitterWithFilter (dataFrame ,filterBy) :
+    filteredDf = (dataFrame[dataFrame['change_type'] == filterBy])
+    print(filteredDf.head())
+    series = filteredDf.groupby(['committer_name','commit_hash'])['changed_file'].count()
     print(series)
     committerDf = series.to_frame().reset_index()
     committerDf = committerDf.rename(columns={'changed_file':'changed_file_count'})
@@ -79,5 +81,17 @@ if __name__ == "__main__":
   getRatios (commitsWithZeroChangeCount, totalFileChangedCount, countsDf)
   getFileChangedAverage (countsDf)
 
+ # addDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.ADD")
+ # getFileChangedMedian(addDataFrame);
+ # totalCommitCount, totalFileChangedCount, addCountsDf  = countCommits(addDataFrame)
+ # getFileChangedAverage (addCountsDf)
 
+#  modifyDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.MODIFY")
+#  getFileChangedMedian(modifyDataFrame);
+#  totalCommitCount, totalFileChangedCount, modifyCountsDf  = countCommits(modifyDataFrame)
+#  getFileChangedAverage (modifyCountsDf)
 
+  deleteDataFrame = groupCommitsFileChangedByCommitterWithFilter(dataFrame, "ModificationType.DELETE")
+  getFileChangedMedian(deleteDataFrame)
+  totalCommitCount, totalFileChangedCount, deleteCountsDf  = countCommits(deleteDataFrame)
+  getFileChangedAverage (deleteCountsDf)

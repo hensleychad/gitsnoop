@@ -77,6 +77,7 @@ def getRatios (totalCommitCount, totalFileChangedCount, countsDf):
 if __name__ == "__main__":
   transactionFile = argv[1]
   commitsWithZeroChangeCount = int(argv[2])  # pass this in, there are commits without changes but tracking them anyway
+  changedFilesFromRevListCount = int(argv[3])  # pass this in
 
   dataFrame = pd.read_csv(transactionFile)
 
@@ -86,7 +87,7 @@ if __name__ == "__main__":
   committerDf = groupCommitsFileChangedByCommitter(dataFrame)
   getFileChangedMedian(committerDf);
   totalCommitCount, totalFileChangedCount, countsDf  = countCommits(committerDf)
-  getRatios (commitsWithZeroChangeCount, totalFileChangedCount, countsDf)
+  getRatios (commitsWithZeroChangeCount, changedFilesFromRevListCount, countsDf)
   getFileChangedAverage (countsDf)
 
   print("Finding Average & Medians for Adds\n")

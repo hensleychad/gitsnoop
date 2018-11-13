@@ -1,0 +1,5 @@
+META_FILE: '/Users/chensle/PycharmProjects/gminer/jira_run/pdf-jira_meta.csv'
+JIRA_URL: 'https://issues.apache.org/jira'
+JIRA_PROJECT_KEY: 'PDFBOX'
+UNTIL_DATE: '2017-11-01'
+

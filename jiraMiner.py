@@ -51,7 +51,7 @@ if __name__ == "__main__":
   issueComments = searchJiraProjectComments(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
   issues = searchJiraProject(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
 
-  metaHandler.write("issue,issue_type,issue_status,issue_assignee,issue_created,issue_updated,issue_summary\n")
+  metaHandler.write("issue,issue_type,issue_status,issue_assignee,reporter,issue_created,issue_updated,issue_summary\n")
 
   formatJiraToCsv( issues , metaHandler)
   formatJiraComments( issueComments , metaHandler)

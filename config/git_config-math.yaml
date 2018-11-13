@@ -1,4 +1,4 @@
-META_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_meta.csv'
+META_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs-jira_meta.csv'
 COUNT_FILE: '/Users/chensle/PycharmProjects/gminer/run/math-vcs_count.csv'
 LOCAL_REPO: '/Users/chensle/emse/SE6356.MS1-SoftwareMaintenanceEvolutionAndRe-Engineering-F18/Projects/local_repo/peep-commons-math'
 ### Keep it small for testing
@@ -23,3 +23,4 @@ STOP_YEAR: 2017
 STOP_MONTH: 11
 STOP_DAY: 1
 TIME_ZONE_OFFSET: 6
+JIRA_PROJECT_ID: "MATH"

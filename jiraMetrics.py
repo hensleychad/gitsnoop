@@ -21,6 +21,12 @@ if __name__ == "__main__":
 
     for i, j in reportedDict.items():
         if i in resolvedDict:
-          print ("{},{},{},{}\n".format(i[0],i[1],j,resolvedDict[i]))
+          print ("{},{},{},{}".format(i[0],i[1],j,resolvedDict[i]))
         else :
-            print("{},{},{},{}\n".format(i[0],i[1],j,0))
+          print("{},{},{},{}".format(i[0],i[1],j,0))
+
+    # gets 0 reported but # completed
+    for i, j in resolvedDict.items():
+        if i not in reportedDict:
+            print("{},{},{},{}".format(i[0],i[1],0,j))
+

@@ -13,11 +13,7 @@ def resolvedMonthlyReport (dataFrame):
     issueResolvedSeries = dataFrame[(dataFrame['issue_type'] == "Bug") & ((dataFrame['issue_status'] == "Resolved") | (dataFrame['issue_status'] == "Closed") )].groupby(['issue_type','resolved_date'])['issue_type'].count()
     return issueResolvedSeries.to_dict()
 
-if __name__ == "__main__":
-    transactionFile = argv[1]
-    dataFrame = pd.read_csv(transactionFile)
-    reportedDict = reporteddMonthlyReport (dataFrame)
-    resolvedDict = resolvedMonthlyReport (dataFrame)
+def outputCsv (reportedDict, resolvedDict) :
 
     for i, j in reportedDict.items():
         if i in resolvedDict:
@@ -29,4 +25,11 @@ if __name__ == "__main__":
     for i, j in resolvedDict.items():
         if i not in reportedDict:
             print("{},{},{},{}".format(i[0],i[1],0,j))
+
+if __name__ == "__main__":
+    transactionFile = argv[1]
+    dataFrame = pd.read_csv(transactionFile)
+    reportedDict = reporteddMonthlyReport (dataFrame)
+    resolvedDict = resolvedMonthlyReport (dataFrame)
+    outputCsv(reportedDict, resolvedDict)
 

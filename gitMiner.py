@@ -34,7 +34,7 @@ def mineBranch( repoPath , branch, startDate, stopDate, projectId,metaHandler):
         jiraTicket = getJiraTicket(commit.msg, projectId)
         for modification in commit.modifications:
             metaHandler.write('{},{},{},{},{},{},{},{},{},{}\n'.format( commit.committer.name, commit.committer.email, commit.committer_date,
-                                                                 modification.filename,modification.old_path,modification.new_path, modification.change_type,commit.hash,jiraTicket,marker))
+                                                                 modification.filename,modification.old_path,modification.new_path,modification.change_type,commit.hash,jiraTicket,marker))
 
 if __name__ == "__main__":
 

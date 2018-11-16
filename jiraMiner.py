@@ -33,19 +33,29 @@ def formatJiraToCsv ( issues , metaHandler ):
            issueResolved = formatDate(issue.fields.resolutiondate)
 
         metaHandler.write('{},{},{},{},{},{}\n'.format(issue,issue.fields.issuetype.name,issue.fields.status,issueCreated,issueUpdated,issueResolved))
+        print ("Creator", issue.fields.creator.displayName)
+        print ("Reporter ", issue.fields.reporter.displayName)
+        print ("Assignee ", issue.fields.assignee)
+        formatJiraComments ( issue, metaHandler )
 
-def formatJiraComments ( issue , metaHandler, users ):
-    #for issue in issues:
+def formatJiraComments ( issues, handler ):
+    for issue in issues:
+        users = ""
         print("Issue -  ", issue)
-        print(issue.raw['fields']['comment']['comments'])
+        #print(issue.raw['fields']['comment']['comments'])
         for comment in issue.fields.comment.comments:
-            print("N Comment -  ", comment.author.name)
-            print("D Comment -  ", comment.author.displayName)
-            users += + "," + comment.author.displayName
+            #print("N Comment -  ", comment.author.name)
+            #print("D Comment -  ", comment.author.displayName)
+            users = users + "," + comment.author.displayName
             #print(issue.raw['fields']['comment']['comments'])
             #print( issue.fields.reporter.displayName)
-        print("Users Network -  ", users)
+        userArray= users.split(',')
+        userList = list(userArray)
+        uList = ','.join(userList)
 
+        #print("Users Network -  ", users)
+        #metaHandler.write('{},{}\n'.format(issue,users))
+        handler.write('{},{}\n'.format(issue,uList))
 def searchJiraProjectComments ( jiraServerUrl, projectId, untilDate ):
     options = {'server': jiraServerUrl}
     jira = JIRA(options)
@@ -63,12 +73,13 @@ if __name__ == "__main__":
 
   config = getconfig(configFile)
   metaHandler = openFile(config["META_FILE"], "w")
+  networkHandler = openFile(config["NETWORK_META_FILE"], "w")
 
-#  issueComments = searchJiraProjectComments(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
-  issues = searchJiraProject(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
-
-  metaHandler.write("issue_id,issue_type,issue_status,issue_created,issue_updated,resolved_date\n")
-  formatJiraToCsv( issues , metaHandler)
-#  formatJiraComments( issueComments , metaHandler)
+  issueComments = searchJiraProjectComments(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
+#  issues = searchJiraProject(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
+#  metaHandler.write("issue_id,issue_type,issue_status,issue_created,issue_updated,resolved_date\n")
+  #formatJiraToCsv( issues , metaHandler)
+  formatJiraComments( issueComments , networkHandler)
 
   closeFile(metaHandler)
+  closeFile(networkHandler)

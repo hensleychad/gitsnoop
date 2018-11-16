@@ -37,6 +37,28 @@ def initMatrix( ntwkDict ):
       count = count +1
   return userDict
 
+def printResults (userDict):
+  final_row = ""
+  count = 0
+  for user_x in userDict:
+    if (count == 40):
+      break
+    for user_y in sorted(userDict[user_x]) :
+        final_row = final_row + "," + str(userDict[user_x][user_y])
+    count = count + 1
+    print (user_x, final_row)
+    final_row = ""
+
+def buildNetwork (userDict):
+    # test keys exist
+    user_xy = 'Andreas Lehmkuhler'
+    user_yx = 'ASF'
+    userDict[user_xy][user_yx] = userDict[user_xy][user_yx]  + 1
+    userDict[user_yx][user_xy] = userDict[user_yx][user_xy]  + 1
+    return userDict
+
+
+
 if __name__ == "__main__":
 
   transactionFile = argv[1]
@@ -45,8 +67,10 @@ if __name__ == "__main__":
 
   uniqueUsersList = buildUniqueUserList(ntwkDict)
   userDict = initMatrix(uniqueUsersList)
+  userNetworkDict = buildNetwork(userDict)
 
-  print (userDict)
+  printResults(userNetworkDict)
+
 
 
 

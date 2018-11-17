@@ -33,10 +33,6 @@ def formatJiraToCsv ( issues , metaHandler ):
            issueResolved = formatDate(issue.fields.resolutiondate)
 
         metaHandler.write('{},{},{},{},{},{}\n'.format(issue,issue.fields.issuetype.name,issue.fields.status,issueCreated,issueUpdated,issueResolved))
-        print ("Creator", issue.fields.creator.displayName)
-        print ("Reporter ", issue.fields.reporter.displayName)
-        print ("Assignee ", issue.fields.assignee)
-        formatJiraComments ( issue, metaHandler )
 
 def formatJiraComments ( issues, handler ):
     for issue in issues:
@@ -59,7 +55,7 @@ def formatJiraComments ( issues, handler ):
 def searchJiraProjectComments ( jiraServerUrl, projectId, untilDate ):
     options = {'server': jiraServerUrl}
     jira = JIRA(options)
-    issues = jira.search_issues('project='+ projectId + ' AND created <= ' + untilDate ,maxResults=None,expand='changelog',fields = 'comment')
+    issues = jira.search_issues('project='+ projectId + ' AND type=Improvement AND created <= ' + untilDate ,maxResults=None,expand='changelog',fields = 'comment')
     return issues
 
 def searchJiraProject( jiraServerUrl, projectId, untilDate ):
@@ -76,9 +72,9 @@ if __name__ == "__main__":
   networkHandler = openFile(config["NETWORK_META_FILE"], "w")
 
   issueComments = searchJiraProjectComments(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
-#  issues = searchJiraProject(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
-#  metaHandler.write("issue_id,issue_type,issue_status,issue_created,issue_updated,resolved_date\n")
-  #formatJiraToCsv( issues , metaHandler)
+  issues = searchJiraProject(config['JIRA_URL'], config['JIRA_PROJECT_KEY'], config['UNTIL_DATE'])
+  metaHandler.write("issue_id,issue_type,issue_status,issue_created,issue_updated,resolved_date\n")
+  formatJiraToCsv( issues , metaHandler)
   formatJiraComments( issueComments , networkHandler)
 
   closeFile(metaHandler)

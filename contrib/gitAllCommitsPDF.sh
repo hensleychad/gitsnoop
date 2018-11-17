@@ -13,6 +13,6 @@ BRANCH_ARRAY=(1.1.x 1.2 1.2.x 1.3 1.4 1.5 1.6 1.7 1.8 2.0 before-apache-packages
     do
        echo $branch
        git checkout -f ${branch}
-       git log  --since="03/01/2008" --until=”11/01/2017” >> ${COMMIT_LOGFILE_PATH} 
+       git log  --since="03/01/2008" --until=”11/01/2017” >> ${COMMIT_LOGFILE_PATH}
        git rev-list --all --until=”11/01/2017” |git diff-tree -r -name-only --stdin | grep : >> ${DIFF_LOGFILE_PATH}
     done
